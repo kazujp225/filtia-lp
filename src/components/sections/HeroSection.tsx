@@ -1,152 +1,123 @@
 
+import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
+  const [activeColor, setActiveColor] = useState<'white' | 'black'>('white');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const benefits = [
-    { icon: '🔧', text: '工事不要' },
-    { icon: '💧', text: '不純物除去※' },
-    { icon: '✨', text: 'お手入れ簡単' },
+    { icon: '🔧', text: '工事不要', sub: '届いたその日から' },
+    { icon: '💧', text: '不純物除去※', sub: '安心の浄水能力' },
+    { icon: '✨', text: 'お手入れ簡単', sub: 'セルフメンテOK' },
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 pb-12 md:py-0" style={{ backgroundColor: 'var(--color-surface)' }}>
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
+    <section className="relative w-full h-[100dvh] min-h-[800px] flex items-center justify-center overflow-hidden bg-slate-50">
+      {/* 1. Immersive Dynamic Background (Vibrant & Gorgeous) */}
+      <div className="absolute inset-0 z-0">
+        {/* Alive Gradient Mesh */}
         <div
-          className="absolute -top-1/2 -right-1/4 w-full h-full rounded-full opacity-5"
-          style={{ backgroundColor: 'var(--color-accent)' }}
+          className="absolute inset-0 opacity-40 mix-blend-multiply transition-all duration-[2000ms]"
+          style={{
+            background: activeColor === 'white'
+              ? 'radial-gradient(at 0% 0%, #2EC4B6 0px, transparent 50%), radial-gradient(at 100% 0%, #E0F2F5 0px, transparent 50%), radial-gradient(at 100% 100%, #D4AF37 0px, transparent 50%)'
+              : 'radial-gradient(at 0% 0%, #0F4C5C 0px, transparent 50%), radial-gradient(at 100% 100%, #1A202C 0px, transparent 50%)'
+          }}
         />
+
+        {/* Animated Particles/Orbs */}
+        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[100px] mix-blend-screen opacity-60 animate-pulse ${activeColor === 'white' ? 'bg-cyan-200' : 'bg-teal-900'}`} style={{ animationDuration: '4s' }} />
+        <div className={`absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full blur-[120px] mix-blend-screen opacity-50 animate-pulse delay-1000 ${activeColor === 'white' ? 'bg-amber-100' : 'bg-slate-800'}`} style={{ animationDuration: '7s' }} />
       </div>
 
-      <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Content */}
-          <div className="order-2 lg:order-1">
-            <p
-              className="text-sm md:text-base font-medium mb-4 animate-fade-in"
-              style={{ color: 'var(--color-accent)', animationDelay: '0.1s' }}
-            >
-              法人向け浄水型ウォーターサーバー
-            </p>
+      <div className="container relative z-10 w-full h-full flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full items-center">
 
-            <h1
-              className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight mb-6"
-              style={{ color: 'var(--color-text-primary)' }}
-            >
-              空間に馴染む、
-              <br />
-              浄水という福利厚生。
+          {/* Left: Content (Major Impact) */}
+          <div className="lg:col-span-5 flex flex-col justify-center text-center lg:text-left pt-20 lg:pt-0 z-20">
+            {/* Badge */}
+            <div className="inline-block mb-6 md:mb-10">
+              <span className="px-8 py-3 rounded-full glass border border-white/50 bg-white/30 backdrop-blur-xl text-sm font-bold tracking-[0.2em] uppercase text-slate-800 shadow-lg animate-fade-in">
+                Premium Water Server
+              </span>
+            </div>
+
+            {/* Main Title - Serif for Luxury */}
+            <h1 className="font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-none mb-8 text-slate-900 drop-shadow-sm">
+              <span className="block mb-2">Pure</span>
+              <span className="block italic font-light text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-500 pb-2">
+                Elegance
+              </span>
             </h1>
 
-            <p
-              className="text-base md:text-lg leading-relaxed mb-8"
-              style={{ color: 'var(--color-text-secondary)' }}
-            >
-              オフィスの品位を保ちながら、安心・安全な水を。
-              <br className="hidden md:block" />
-              ボトル不要で運用の手間を最小限に。
+            <p className="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed font-medium max-w-md mx-auto lg:mx-0">
+              空間に溶け込む、美しい浄水体験。<br />
+              オフィスの品格を高める、<br className="md:hidden" />
+              新しい選択肢を。
             </p>
 
-            {/* Benefits */}
-            <div className="flex flex-wrap gap-4 mb-10">
-              {benefits.map((benefit, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
-                  style={{ backgroundColor: 'var(--color-base)', color: 'var(--color-text-primary)' }}
-                >
-                  <span>{benefit.icon}</span>
-                  <span>{benefit.text}</span>
+            {/* High-End CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
+              <a href="#contact" className="btn-primary group !bg-gradient-to-r !from-teal-600 !to-cyan-600 !shadow-cyan-500/30 !px-10 !py-5 !text-lg !rounded-full text-white inline-flex items-center justify-center gap-2">
+                <span>View Plans</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+              <a href="#contact" className="px-10 py-5 rounded-full glass border border-slate-300 text-slate-700 font-bold hover:bg-white/60 transition-all flex items-center gap-2 justify-center">
+                Download Brochure
+              </a>
+            </div>
+
+            {/* Glass Benefits */}
+            <div className="flex gap-4 justify-center lg:justify-start">
+              {benefits.map((b, i) => (
+                <div key={i} className="glass bg-white/40 p-3 rounded-2xl text-center min-w-[100px] backdrop-blur-md border border-white/60 shadow-sm transition-transform hover:-translate-y-1">
+                  <div className="text-2xl mb-1">{b.icon}</div>
+                  <div className="text-xs font-bold text-slate-700">{b.text}</div>
                 </div>
               ))}
             </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#contact" className="btn-primary text-center">
-                導入相談・見積依頼
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a href="#contact" className="btn-secondary text-center">
-                資料請求（無料）
-              </a>
-            </div>
-
-            {/* Phone */}
-            <p className="mt-6 text-sm" style={{ color: 'var(--color-text-secondary)' }}>
-              お急ぎの方はお電話でも：
-              <a
-                href="tel:0120-XXX-XXX"
-                className="font-semibold ml-2 hover:opacity-70 transition-opacity"
-                style={{ color: 'var(--color-text-primary)' }}
-              >
-                0120-XXX-XXX
-              </a>
-              <span className="text-xs ml-2">（平日 9:00-18:00）</span>
-            </p>
           </div>
 
-          {/* Right: Image */}
-          <div className="order-1 lg:order-2 flex justify-center">
-            <div className="relative w-full max-w-md lg:max-w-lg">
-              {/* Product image placeholder with SVG */}
-              <div
-                className="aspect-[3/4] rounded-2xl flex items-center justify-center p-8"
-                style={{ backgroundColor: 'var(--color-base)' }}
-              >
-                <div className="flex gap-4 md:gap-8 items-end justify-center">
-                  <div className="text-center group cursor-pointer hover:opacity-90 transition-opacity">
-                    <img
-                      src="/images/fv-main.png"
-                      alt="Filtia White"
-                      className="h-56 md:h-64 mx-auto object-contain drop-shadow-xl"
-                    />
-                    <p className="text-xs mt-3 font-medium" style={{ color: 'var(--color-text-secondary)' }}>ホワイト</p>
-                  </div>
-                  <div className="text-center group cursor-pointer hover:opacity-90 transition-opacity">
-                    <img
-                      src="/images/fv-main-black.png"
-                      alt="Filtia Black"
-                      className="h-56 md:h-64 mx-auto object-contain drop-shadow-xl"
-                    />
-                    <p className="text-xs mt-3 font-medium" style={{ color: 'var(--color-text-secondary)' }}>ブラック</p>
-                  </div>
-                </div>
-              </div>
+          {/* Right: Product (Gamen Ippai / Full Height) */}
+          <div className="lg:col-span-7 h-[50vh] lg:h-full relative flex items-center justify-center">
+            {/* Huge Circle Backdrop */}
+            <div className="absolute w-[60vh] h-[60vh] lg:w-[80vh] lg:h-[80vh] rounded-full border border-white/20 bg-gradient-to-b from-white/40 to-transparent backdrop-blur-sm" />
 
-              {/* Floating badge */}
-              <div
-                className="absolute -bottom-4 -left-4 md:-left-8 bg-white rounded-xl shadow-lg p-4"
-              >
-                <p className="text-xs mb-1" style={{ color: 'var(--color-text-secondary)' }}>選べる2カラー</p>
-                <div className="flex gap-2">
-                  <span className="w-6 h-6 rounded-full bg-white border-2 border-gray-200" />
-                  <span className="w-6 h-6 rounded-full bg-gray-900" />
-                </div>
-              </div>
+            {/* Product Image - Dominating vertically */}
+            <div className="relative w-full h-[100%] flex items-center justify-center -mt-10 lg:mt-0 transition-all duration-700">
+              <img
+                src={activeColor === 'white' ? "/images/fv-main.png" : "/images/fv-main-black.png"}
+                alt="Filtia Premium"
+                className={`max-h-[85%] lg:max-h-[90%] w-auto object-contain drop-shadow-2xl transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{
+                  filter: 'drop-shadow(0 50px 100px rgba(0,0,0,0.2))'
+                }}
+              />
+            </div>
 
-              {/* Type badge */}
-              <div
-                className="absolute -top-4 -right-4 md:-right-8 bg-white rounded-xl shadow-lg p-4"
+            {/* Elegant Color Switcher */}
+            <div className="absolute bottom-10 right-4 lg:right-10 flex flex-col gap-4 z-30">
+              <button
+                onClick={() => setActiveColor('white')}
+                className={`w-12 h-12 rounded-full border-2 transition-all ${activeColor === 'white' ? 'border-teal-500 scale-110 shadow-lg shadow-teal-500/20' : 'border-white/50 bg-white/50 hover:bg-white/80'}`}
+                aria-label="Select White Model"
               >
-                <p className="text-xs mb-1" style={{ color: 'var(--color-text-secondary)' }}>選べるタイプ</p>
-                <p className="text-sm font-medium" style={{ color: 'var(--color-text-primary)' }}>
-                  ロング / ショート
-                </p>
-              </div>
+                <div className="w-full h-full rounded-full bg-white border-2 border-transparent" />
+              </button>
+              <button
+                onClick={() => setActiveColor('black')}
+                className={`w-12 h-12 rounded-full border-2 transition-all ${activeColor === 'black' ? 'border-teal-500 scale-110 shadow-lg shadow-teal-500/20' : 'border-slate-400/50 bg-slate-900/10 hover:bg-slate-900/20'}`}
+                aria-label="Select Black Model"
+              >
+                <div className="w-full h-full rounded-full bg-slate-900 border-2 border-transparent" />
+              </button>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block">
-        <div className="flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs" style={{ color: 'var(--color-text-secondary)' }}>Scroll</span>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--color-text-secondary)' }}>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
         </div>
       </div>
     </section>

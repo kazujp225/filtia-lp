@@ -38,46 +38,56 @@ const FlowSection = () => {
         />
 
         <div className="relative max-w-4xl mx-auto">
-          {/* Connection line - hidden on mobile */}
+          {/* Connection line - Desktop (Horizontal) */}
           <div
-            className="hidden md:block absolute top-20 left-0 right-0 h-0.5"
+            className="hidden md:block absolute top-[2.5rem] left-0 right-0 h-0.5"
             style={{ backgroundColor: 'var(--color-line)' }}
+            aria-hidden="true"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Connection line - Mobile (Vertical) */}
+          <div
+            className="md:hidden absolute top-0 bottom-0 left-[2rem] w-0.5"
+            style={{ backgroundColor: 'var(--color-line)' }}
+            aria-hidden="true"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
             {steps.map((step, index) => (
-              <div key={index} className="relative text-center">
+              <div key={index} className="relative text-center md:text-center flex md:block items-start md:items-center gap-6 md:gap-0 pl-16 md:pl-0">
                 {/* Icon circle */}
                 <div
-                  className="relative z-10 w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
+                  className="absolute left-0 top-0 md:static md:mx-auto md:mb-6 z-10 w-16 h-16 rounded-full flex items-center justify-center shadow-lg border-4 border-white"
                   style={{ backgroundColor: 'var(--color-accent-dark)', color: 'white' }}
                 >
                   {step.icon}
                 </div>
 
-                {/* Step number */}
-                <p
-                  className="text-sm font-bold mb-2"
-                  style={{ color: 'var(--color-accent)' }}
-                >
-                  STEP {step.number}
-                </p>
+                <div className="text-left md:text-center pt-2 md:pt-0">
+                  {/* Step number */}
+                  <p
+                    className="text-sm font-bold mb-1 tracking-widest uppercase"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    STEP {step.number}
+                  </p>
 
-                {/* Title */}
-                <h3
-                  className="text-lg font-semibold mb-2"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
-                  {step.title}
-                </h3>
+                  {/* Title */}
+                  <h3
+                    className="text-lg font-bold mb-3"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    {step.title}
+                  </h3>
 
-                {/* Description */}
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
-                >
-                  {step.description}
-                </p>
+                  {/* Description */}
+                  <p
+                    className="text-sm leading-relaxed text-balance"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

@@ -160,7 +160,14 @@ h6 {
 
 /* Card styles */
 .card {
-  @apply glass-card;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 10px 15px -3px rgba(0, 0, 0, 0.03);
+  border-radius: 1rem;
   padding: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
